@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkWindow" id="window1">
+    <child>
+      <object class="GtkVBox" id="main_vbox">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkMenuBar" id="menubar1">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkMenuItem" id="file">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">&#x6587;&#x4EF6;(_F)</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="file_menu">
+                    <property name="visible">True</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="backup">
+                        <property name="visible">True</property>
+                        <property name="use_action_appearance">True</property>
+                        <property name="related_action">backup_action</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="restore">
+                        <property name="visible">True</property>
+                        <property name="use_action_appearance">True</property>
+                        <property name="related_action">restore_action</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparatorMenuItem" id="separator">
+                        <property name="visible">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="quit">
+                        <property name="visible">True</property>
+                        <property name="use_action_appearance">True</property>
+                        <property name="related_action">quit_action</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="help">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">&#x5E2E;&#x52A9;(_H)</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="help_menu">
+                    <property name="visible">True</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="about">
+                        <property name="label">gtk-about</property>
+                        <property name="visible">True</property>
+                        <property name="related_action">about_action</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkNotebook" id="notebook">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkTextView" id="welcome_text">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="pixels_above_lines">10</property>
+                <property name="pixels_below_lines">10</property>
+                <property name="editable">False</property>
+                <property name="wrap_mode">char</property>
+                <property name="left_margin">10</property>
+                <property name="right_margin">10</property>
+                <property name="indent">25</property>
+                <property name="cursor_visible">False</property>
+                <property name="buffer">welcome_buffer</property>
+              </object>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel" id="welcome_label">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">&#x6B22;&#x8FCE;</property>
+              </object>
+              <packing>
+                <property name="tab_fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child type="tab">
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child type="tab">
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHButtonBox" id="hbuttonbox1">
+            <property name="visible">True</property>
+            <property name="layout_style">spread</property>
+            <child>
+              <object class="GtkButton" id="backup_button">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">True</property>
+                <property name="related_action">backup_action</property>
+                <property name="use_underline">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="restore_button">
+                <property name="label" translatable="yes">&#x8FD8;&#x539F;</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="related_action">restore_action</property>
+                <property name="use_underline">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="apply_button">
+                <property name="label" translatable="yes">&#x5E94;&#x7528;</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="related_action">apply_action</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="padding">3</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkStatusbar" id="statusbar">
+            <property name="visible">True</property>
+            <property name="spacing">2</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkAction" id="backup_action">
+    <property name="label">&#x5907;&#x4EFD;(_B)</property>
+    <property name="short_label">&#x5907;&#x4EFD;(_B)</property>
+    <property name="icon_name">document-save</property>
+  </object>
+  <object class="GtkAction" id="restore_action">
+    <property name="stock_id">gtk-revert-to-saved</property>
+  </object>
+  <object class="GtkAction" id="quit_action">
+    <property name="stock_id">gtk-quit</property>
+  </object>
+  <object class="GtkAction" id="apply_action">
+    <property name="stock_id">gtk-apply</property>
+  </object>
+  <object class="GtkAction" id="about_action"/>
+  <object class="GtkTextBuffer" id="welcome_buffer">
+    <property name="text" translatable="yes">&#x6B22;&#x8FCE;&#x4F7F;&#x7528; Wall Slasher&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x5E2E;&#x52A9;&#x60A8;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x4E2D;&#x7684; hosts &#x6587;&#x4EF6;&#xFF0C;&#x4EE5;&#x8FBE;&#x5230;&#x5C4F;&#x853D;&#x5E7F;&#x544A;&#xFF0C;&#x9694;&#x79BB;&#x9493;&#x9C7C;&#x3001;&#x75C5;&#x6BD2;&#x3001;&#x8272;&#x60C5;&#x7F51;&#x7AD9;&#xFF0C;&#x4FEE;&#x590D;&#x90E8;&#x5206;&#x7F51;&#x7AD9;&#x8BBF;&#x95EE;&#x95EE;&#x9898;&#x7B49;&#x76EE;&#x7684;&#x3002;
+&#x5E0C;&#x671B;&#x5927;&#x5BB6;&#x52AA;&#x529B;&#x63A8;&#x5E7F;&#x8FD9;&#x4E2A;&#x8F6F;&#x4EF6;&#xFF0C;&#x4E3A;&#x9752;&#x5C11;&#x5E74;&#x8425;&#x9020;&#x7EFF;&#x8272;&#x7684;&#x4E0A;&#x7F51;&#x73AF;&#x5883;&#xFF0C;&#x4E3A;&#x6784;&#x5EFA;&#x548C;&#x8C10;&#x793E;&#x4F1A;&#x505A;&#x51FA;&#x8D21;&#x732E;&#xFF01;
+&#x70B9;&#x51FB;&#x201C;&#x5907;&#x4EFD;&#x201D;&#x6309;&#x94AE;&#x5907;&#x4EFD;&#x7CFB;&#x7EDF;&#x5F53;&#x524D;&#x7684; hosts &#x6587;&#x4EF6;&#xFF0C;&#x5355;&#x51FB;&#x201C;&#x8FD8;&#x539F;&#x201D;&#x6309;&#x94AE;&#x5C06;&#x5907;&#x4EFD;&#x7684; hosts &#x6587;&#x4EF6;&#x8FD8;&#x539F;&#x3002;
+&#x5F3A;&#x70C8;&#x5EFA;&#x8BAE;&#x60A8;&#x5728;&#x7B2C;&#x4E00;&#x6B21;&#x4F7F;&#x7528;&#x524D;&#x8FDB;&#x884C;&#x5907;&#x4EFD;&#x3002;
+&#x672C;&#x7A0B;&#x5E8F;&#x6682;&#x65F6;&#x53EA;&#x652F;&#x6301;&#x5BF9; hosts &#x6587;&#x4EF6;&#x7684;&#x8FFD;&#x52A0;&#x64CD;&#x4F5C;&#xFF0C;&#x5373;&#x53EA;&#x80FD;&#x5411;&#x6587;&#x4EF6;&#x672B;&#x5C3E;&#x6DFB;&#x52A0;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x8981;&#x7684;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x8FFD;&#x52A0;&#x64CD;&#x4F5C;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528;&#x8FD8;&#x539F;&#x529F;&#x80FD;&#x6062;&#x590D;&#x5230;&#x6700;&#x521D;&#x7684;&#x72B6;&#x6001;&#x3002;
+&#x5982;&#x679C;&#x60A8;&#x770B;&#x5230;&#x5E76;&#x7406;&#x89E3;&#x4E86;&#x4E0A;&#x9762;&#x7684;&#x8BDD;&#xFF0C;&#x8BF7;&#x70B9;&#x51FB;&#x201C;&#x5907;&#x4EFD;&#x201D;&#x6309;&#x94AE;&#x5F00;&#x59CB;&#x4F7F;&#x7528;&#x672C;&#x7A0B;&#x5E8F;&#x3002;</property>
+  </object>
+  <object class="GtkAboutDialog" id="aboutdialog1">
+    <property name="border_width">5</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">normal</property>
+    <property name="has_separator">False</property>
+    <property name="program_name">Wall Slasher</property>
+    <property name="version">0.1</property>
+    <property name="copyright" translatable="yes">Licensed under GPL v2</property>
+    <property name="comments" translatable="yes">Wall Slasher &#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x7C7B; Unix &#x7CFB;&#x7EDF;&#x7684; hosts &#x6587;&#x4EF6;&#x7684;&#x7B80;&#x5355;&#x7BA1;&#x7406;&#x5DE5;&#x5177;&#xFF0C;&#x7528;&#x4E8E;&#x5C4F;&#x853D;&#x5E7F;&#x544A;&#x548C;&#x4FEE;&#x590D;&#x4E00;&#x4E9B;&#x7F51;&#x7AD9;&#x590D;&#x6742;&#x7684;&#x7F51;&#x7EDC;&#x95EE;&#x9898;&#x3002;</property>
+    <property name="website">http://www.kissuki.com/</property>
+    <property name="website_label" translatable="yes">K.I.S.S. - &#x7B80;&#x5355;&#x54F2;&#x5B66;</property>
+    <property name="authors">Iven Day</property>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="about_vbox">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="about_action_area">
+            <property name="visible">True</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
