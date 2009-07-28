@@ -20,11 +20,18 @@
 # Copyright (C) 2009 Iven Day
 
 VERSION = '@version@'
-
 DATADIR = '@prefix@/share'
 
+# glade file
 GLADE_FILE = DATADIR + '/wall-slasher/glade/wall-slasher.glade'
 
+# hosts file
 F_OK, X_OK, W_OK, R_OK = 0, 1, 2, 4
-
 HOSTS = '/etc/hosts'
+
+# PolicyKit
+POLICYKIT_INTERFACE = 'com.kissuki.wall-slasher'
+
+# D-BUS
+INTERFACE = 'com.kissuki.wall_slasher'
+PATH = '/com/kissuki/wall_slasher'

@@ -1,4 +1,0 @@
-[D-BUS Service]
-Name=com.kissuki.wall-slasher
-Exec=/usr/sbin/wall-slasher-daemon
-User=root

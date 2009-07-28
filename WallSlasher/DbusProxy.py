@@ -19,18 +19,17 @@
 # Copyright (C) 2009 Iven Day
 
 import dbus
+from WallSlasher.Constants import INTERFACE, PATH
 
 class DbusProxy:
-    INTERFACE = 'com.kissuki.wall-slasher'
-
     try:
         __system_bus = dbus.SystemBus()
-        __proxy = __system_bus.get_object(INTERFACE, '/com/kissuki/wall-slasher)
+        __proxy = __system_bus.get_object(INTERFACE, PATH)
     except dbus.exceptions.DBusException:
         __proxy = None
 
     def __getattr__(self, name):
-        return self.__proxy.get_dbus_method(name, dbus_interface = self.INTERFACE)
+        return self.__proxy.get_dbus_method(name, INTERFACE)
 
     def get_proxy(self):
         return self.__proxy

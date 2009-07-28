@@ -103,18 +103,15 @@ with open("VERSION") as version_file:
         version = version.split("=")[1]
 
 with open(os.path.join("WallSlasher/Constants.py.in")) as f:
-    data = f.read()
-
-data = data.replace("@prefix@", prefix)
-data = data.replace("@version@", version)
+    data = f.read().replace("@prefix@", prefix).replace("@version@", version)
 
 with open(os.path.join("WallSlasher/Constants.py"), "w") as f:
     f.write(data)
 
 data_files = [('share/wall-slasher/glade', ['glade/wall-slasher.glade',]),
-           ('/usr/share/dbus-1/system-services', ['policykit/com.kissuki.wall-slasher.service',]),
+           ('/usr/share/dbus-1/system-services', ['policykit/com.kissuki.wall_slasher.service',]),
            ('/usr/share/PolicyKit/policy', ['policykit/com.kissuki.wall-slasher.policy',]),
-           ('/etc/dbus-1/system.d', ['policykit/com.kissuki.wall-slasher.conf',]),
+           ('/etc/dbus-1/system.d', ['policykit/wall-slasher.conf',]),
            ]
 
 setup (
@@ -127,7 +124,7 @@ setup (
         license          = "GPL",
         data_files       = data_files,
         packages         = ["WallSlasher"],
-        scripts          = ["wall-slasher"],
+        scripts          = ["wall-slasher", 'wall-slasher-daemon'],
         cmdclass         = {"uninstall" : uninstall,
                             "install" : install,
                             "install_data" : install_data}

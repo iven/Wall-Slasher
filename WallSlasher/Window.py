@@ -27,6 +27,7 @@ import os
 
 from WallSlasher.Constants import *
 from WallSlasher.PolkitAction import PolkitAction
+from WallSlasher.DbusProxy import proxy
 
 class MainWin():
     "Main Window"
@@ -57,10 +58,10 @@ class MainWin():
         xid = self.main_window.window.xid
 
         try:
-            granted = agent.ObtainAuthorization('com.kissuki.wall-slasher',
-                    dbus.UInt32(xid), dbus.UInt32(os.getpid()))
+            granted = agent.ObtainAuthorization(POLICYKIT_INTERFACE,
+                    dbus.UInt32(xid))
         except dbus.exceptions.DBusException:
-            return 
+            granted = False
 
         if granted:
             widget.set_sensitive(False)
@@ -69,7 +70,7 @@ class MainWin():
             self.builder.get_object('apply_action').set_sensitive(True)
 
     def on_backup_activate(self, data):
-        print 'backup'
+        proxy.backup()
 
     def on_restore_activate(self, data):
         print 'restore'

@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
+# This file is part of Wall Slasher.
+
+# Wall Slasher is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# Wall Slasher is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Author(s): Iven Day (Xu Lijian) <ivenvd@gmail.com>
+# Copyright (C) 2009 Iven Day
+
+import dbus
+import dbus.service
+import dbus.mainloop.glib
+import gobject
+import shutil
+from WallSlasher.Constants import *
+
+class Daemon(dbus.service.Object):
+    def __init__(self):
+        dbus.service.Object.__init__(self)
+
+    @dbus.service.method(INTERFACE, in_signature = '', out_signature = '')
+    def backup(self):
+        shutil.copyfile(HOSTS, HOSTS + '.bak')
+
+    @dbus.service.method(INTERFACE, in_signature = '', out_signature = '')
+    def restore(self):
+        shutil.copyfile(HOSTS + '.bak', HOSTS)
+
+    @dbus.service.method(INTERFACE, in_signature = '', out_signature = '')
+    def exit(self):
+        mainloop.quit()
+
+if __name__ == '__main__':
+    dbus.mainloop.glib.DBusGMainLoop(set_as_default = True)
+
+    system_bus = dbus.SystemBus()
+    bus_name = dbus.service.BusName(INTERFACE, system_bus)
+    object = Daemon(system_bus, PATH)
+
+    mainloop = gobject.MainLoop()
+    mainloop.run()
