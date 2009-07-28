@@ -79,6 +79,7 @@
                         <property name="visible">True</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="activate" handler="on_about_activate"/>
                       </object>
                     </child>
                   </object>
@@ -160,8 +161,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="related_action">backup_action</property>
                 <property name="use_action_appearance">True</property>
+                <property name="related_action">backup_action</property>
                 <property name="use_underline">True</property>
               </object>
               <packing>
@@ -249,7 +250,7 @@
 &#x672C;&#x7A0B;&#x5E8F;&#x6682;&#x65F6;&#x53EA;&#x652F;&#x6301;&#x5BF9; hosts &#x6587;&#x4EF6;&#x7684;&#x8FFD;&#x52A0;&#x64CD;&#x4F5C;&#xFF0C;&#x5373;&#x53EA;&#x80FD;&#x5411;&#x6587;&#x4EF6;&#x672B;&#x5C3E;&#x6DFB;&#x52A0;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x8981;&#x7684;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x8FFD;&#x52A0;&#x64CD;&#x4F5C;&#xFF0C;&#x8BF7;&#x4F7F;&#x7528;&#x8FD8;&#x539F;&#x529F;&#x80FD;&#x6062;&#x590D;&#x5230;&#x6700;&#x521D;&#x7684;&#x72B6;&#x6001;&#x3002;
 &#x5982;&#x679C;&#x60A8;&#x770B;&#x5230;&#x5E76;&#x7406;&#x89E3;&#x4E86;&#x4E0A;&#x9762;&#x7684;&#x8BDD;&#xFF0C;&#x8BF7;&#x70B9;&#x51FB;&#x201C;&#x5907;&#x4EFD;&#x201D;&#x6309;&#x94AE;&#x5F00;&#x59CB;&#x4F7F;&#x7528;&#x672C;&#x7A0B;&#x5E8F;&#x3002;</property>
   </object>
-  <object class="GtkAboutDialog" id="aboutdialog1">
+  <object class="GtkAboutDialog" id="about_dialog">
     <property name="border_width">5</property>
     <property name="window_position">center-on-parent</property>
     <property name="type_hint">normal</property>

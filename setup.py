@@ -111,7 +111,11 @@ data = data.replace("@version@", version)
 with open(os.path.join("WallSlasher/Constants.py"), "w") as f:
     f.write(data)
 
-data_files = [('share/wall-slasher/glade', ['glade/wall-slasher.glade',])]
+data_files = [('share/wall-slasher/glade', ['glade/wall-slasher.glade',]),
+           ('/usr/share/dbus-1/system-services', ['policykit/com.kissuki.wall-slasher.service',]),
+           ('/usr/share/PolicyKit/policy', ['policykit/com.kissuki.wall-slasher.policy',]),
+           ('/etc/dbus-1/system.d', ['policykit/com.kissuki.wall-slasher.conf',]),
+           ]
 
 setup (
         name             = "Wall Slasher",
