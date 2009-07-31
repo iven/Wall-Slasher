@@ -27,7 +27,8 @@ GLADE_FILE = DATADIR + '/wall-slasher/glade/wall-slasher.glade'
 
 # hosts file
 F_OK, X_OK, W_OK, R_OK = 0, 1, 2, 4
-HOSTS = '/etc/hosts'
+HOSTS_FILE = '/etc/hosts'
+BACKUP_FILE = '/etc/hosts.bak'
 
 # PolicyKit
 POLICYKIT_INTERFACE = 'com.kissuki.wall-slasher'

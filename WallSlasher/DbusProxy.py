@@ -31,7 +31,4 @@ class DbusProxy:
     def __getattr__(self, name):
         return self.__proxy.get_dbus_method(name, INTERFACE)
 
-    def get_proxy(self):
-        return self.__proxy
-
 proxy = DbusProxy()

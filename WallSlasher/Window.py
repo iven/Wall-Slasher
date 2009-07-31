@@ -34,8 +34,8 @@ class MainWin():
     session_bus = dbus.SessionBus()
 
     def __init__(self):
-        self.builder = gtk.Builder()
-        self.builder.add_from_file(GLADE_FILE)
+        builder = gtk.Builder()
+        builder.add_from_file(GLADE_FILE)
         signals_dict = {
             'on_unlock_activate': self.on_unlock_activate,
             'on_backup_activate': self.on_backup_activate,
@@ -44,41 +44,63 @@ class MainWin():
             'on_quit_activate': self.on_quit_activate,
             'on_about_activate': self.on_about_activate,
         }
-        self.builder.connect_signals(signals_dict)
+        builder.connect_signals(signals_dict)
         
-        self.main_window = self.builder.get_object('main_window')
+        self.main_window = builder.get_object('main_window')
         colormap = self.main_window.get_screen().get_rgba_colormap()
         if colormap:
             gtk.widget_set_default_colormap(colormap)
         self.main_window.show_all()
+        
+        self.xid = self.main_window.window.xid
+        self.backup_action = builder.get_object('backup_action')
+        self.restore_action = builder.get_object('restore_action')
+        self.apply_action = builder.get_object('apply_action')
+
+    def backup_file_exists(self):
+        return os.path.exists(BACKUP_FILE)
 
     def on_unlock_activate(self, widget):
         agent = self.session_bus.get_object(
                 'org.freedesktop.PolicyKit.AuthenticationAgent', '/')
-        xid = self.main_window.window.xid
-
         try:
             granted = agent.ObtainAuthorization(POLICYKIT_INTERFACE,
-                    dbus.UInt32(xid))
+                    dbus.UInt32(self.xid), dbus.UInt32(os.getpid()))
         except dbus.exceptions.DBusException:
             granted = False
-
         if granted:
             widget.set_sensitive(False)
-            self.builder.get_object('backup_action').set_sensitive(True)
-            self.builder.get_object('restore_action').set_sensitive(True)
-            self.builder.get_object('apply_action').set_sensitive(True)
+            self.backup_action.set_sensitive(True)
+            self.apply_action.set_sensitive(True)
+            if self.backup_file_exists():
+                self.restore_action.set_sensitive(True)
 
     def on_backup_activate(self, data):
+        if self.backup_file_exists():
+            dialog = gtk.MessageDialog(self.main_window, gtk.DIALOG_MODAL,
+                    gtk.MESSAGE_WARNING, gtk.BUTTONS_YES_NO,
+                    "文件已存在，是否覆盖？")
+            result = dialog.run()
+            dialog.destroy()
+            if result != gtk.RESPONSE_YES:
+                return
         proxy.backup()
+        self.restore_action.set_sensitive(True)
 
     def on_restore_activate(self, data):
-        print 'restore'
+        dialog = gtk.MessageDialog(self.main_window, gtk.DIALOG_MODAL,
+                gtk.MESSAGE_WARNING, gtk.BUTTONS_OK_CANCEL,
+                "操作不可恢复，确定继续？")
+        result = dialog.run()
+        dialog.destroy()
+        if result == gtk.RESPONSE_OK:
+            proxy.restore()
 
     def on_apply_activate(self, data):
         print 'apply'
 
     def on_quit_activate(self, *args):
+        proxy.exit()
         gtk.widget_pop_colormap()
         gtk.main_quit()
 

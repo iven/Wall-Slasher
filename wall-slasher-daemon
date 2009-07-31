@@ -27,16 +27,16 @@ import shutil
 from WallSlasher.Constants import *
 
 class Daemon(dbus.service.Object):
-    def __init__(self):
-        dbus.service.Object.__init__(self)
+    def __init__(self, bus, path):
+        dbus.service.Object.__init__(self, bus, path)
 
     @dbus.service.method(INTERFACE, in_signature = '', out_signature = '')
     def backup(self):
-        shutil.copyfile(HOSTS, HOSTS + '.bak')
+        shutil.copyfile(HOSTS_FILE, BACKUP_FILE)
 
     @dbus.service.method(INTERFACE, in_signature = '', out_signature = '')
     def restore(self):
-        shutil.copyfile(HOSTS + '.bak', HOSTS)
+        shutil.copyfile(BACKUP_FILE, HOSTS_FILE)
 
     @dbus.service.method(INTERFACE, in_signature = '', out_signature = '')
     def exit(self):
